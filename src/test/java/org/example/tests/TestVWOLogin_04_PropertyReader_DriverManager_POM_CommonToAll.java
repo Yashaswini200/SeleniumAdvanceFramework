@@ -17,7 +17,7 @@ public class TestVWOLogin_04_PropertyReader_DriverManager_POM_CommonToAll {
     @Test
     public void test_negative_vwo_login() throws Exception {
 
-        // Page Class Code (POM Code) - 2
+        // Page Class Code (POM Code)- 2
         LoginPage loginPage  = new LoginPage(DriverManager.getDriver());
         String error_msg = loginPage.loginToVWOLoginInvalidCreds(PropertiesReader.readKey("invalid_username"),PropertiesReader.readKey("invalid_password"));
 
