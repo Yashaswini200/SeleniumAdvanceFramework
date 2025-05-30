@@ -21,7 +21,7 @@ public class TestVWOLogin_04_PropertyReader_DriverManager_POM_CommonToAll {
         LoginPage loginPage  = new LoginPage(DriverManager.getDriver());
         String error_msg = loginPage.loginToVWOLoginInvalidCreds(PropertiesReader.readKey("invalid_username"),PropertiesReader.readKey("invalid_password"));
 
-        // Assertions - 3
+        // Assertions -3
         assertThat(error_msg).isNotBlank().isNotNull().isNotEmpty();
         Assert.assertEquals(error_msg,PropertiesReader.readKey("error_message"));
 
