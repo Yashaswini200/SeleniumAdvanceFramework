@@ -20,7 +20,7 @@ public class TestVWOLogin_02_PropertyReader_DriverManager_POM {
 
 
 
-        // Driver Manager Code - 1
+        // Driver Manager Code- 1
         DriverManager.init();
         // Page Class Code (POM Code) -
         LoginPage loginPage  = new LoginPage(DriverManager.getDriver());
