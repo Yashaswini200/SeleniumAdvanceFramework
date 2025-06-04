@@ -1,0 +1,442 @@
+Index: src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.tests;\r\n\r\n\r\nimport io.qameta.allure.Description;\r\nimport io.qameta.allure.Owner;\r\nimport org.example.driver.DriverManager;\r\nimport org.example.pages.pageObjectModel.appvwo.Improved_POM.DashbordPage;\r\nimport org.example.pages.pageObjectModel.appvwo.Improved_POM.LoginPage;\r\nimport org.example.utils.PropertiesReader;\r\nimport org.testng.Assert;\r\nimport org.testng.annotations.Test;\r\n\r\nimport static org.assertj.core.api.Assertions.assertThat;\r\n\r\npublic class TestVWOLogin_02_PropertyReader_DriverManager_POM {\r\n\r\n    @Description(\"TC#1- Verify that with invalid email, pass, error message is shown on the app.vwo.com\")\r\n    @Test\r\n    public void test_negative_vwo_login() throws Exception {\r\n\r\n\r\n\r\n        // Driver Manager Code - 1\r\n        DriverManager.init();\r\n        // Page Class Code (POM Code) -\r\n        LoginPage loginPage  = new LoginPage(DriverManager.getDriver());\r\n        String error_msg = loginPage.loginToVWOLoginInvalidCreds(PropertiesReader.readKey(\"invalid_username\"),PropertiesReader.readKey(\"invalid_password\"));\r\n\r\n        // Assertions - 3\r\n        assertThat(error_msg).isNotBlank().isNotNull().isNotEmpty();\r\n        Assert.assertEquals(error_msg, PropertiesReader.readKey(\"error_message\"));\r\n\r\n        DriverManager.getDriver().quit();\r\n\r\n    }\r\n\r\n    @Owner(\"PRAMOD\")\r\n    @Description(\"TC#2-Verify that valid creds dashboard page is loaded\")\r\n    @Test\r\n    public void testLoginPositiveVWO() throws InterruptedException {\r\n\r\n        LoginPage loginPage_VWO = new LoginPage(DriverManager.getDriver());\r\n        loginPage_VWO.loginToVWOLoginValidCreds(PropertiesReader.readKey(\"username\"),PropertiesReader.readKey(\"password\"));\r\n\r\n        DashbordPage dashBoardPage  = new DashbordPage(DriverManager.getDriver());\r\n        String usernameLoggedIn = dashBoardPage.loggedInUserName();\r\n\r\n\r\n        assertThat(usernameLoggedIn).isNotBlank().isNotNull().isNotEmpty();\r\n        Assert.assertEquals(usernameLoggedIn,PropertiesReader.readKey(\"expected_username\"));\r\n\r\n\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java b/src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java
+--- a/src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java	(revision 787e2544f7ddfb967b1325ac8a92041cd88bd7ad)
++++ b/src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java	(date 1748445358189)
+@@ -3,6 +3,8 @@
+ 
+ import io.qameta.allure.Description;
+ import io.qameta.allure.Owner;
++import org.apache.logging.log4j.LogManager;
++import org.apache.logging.log4j.Logger;
+ import org.example.driver.DriverManager;
+ import org.example.pages.pageObjectModel.appvwo.Improved_POM.DashbordPage;
+ import org.example.pages.pageObjectModel.appvwo.Improved_POM.LoginPage;
+@@ -13,6 +15,7 @@
+ import static org.assertj.core.api.Assertions.assertThat;
+ 
+ public class TestVWOLogin_02_PropertyReader_DriverManager_POM {
++//    private static final Logger logger = LogManager.getLogger(TestVWOLogin_Retry.class);
+ 
+     @Description("TC#1- Verify that with invalid email, pass, error message is shown on the app.vwo.com")
+     @Test
+@@ -25,6 +28,7 @@
+         // Page Class Code (POM Code) -
+         LoginPage loginPage  = new LoginPage(DriverManager.getDriver());
+         String error_msg = loginPage.loginToVWOLoginInvalidCreds(PropertiesReader.readKey("invalid_username"),PropertiesReader.readKey("invalid_password"));
++        logger.info("Starting the Testcases Page Object Model");
+ 
+         // Assertions - 3
+         assertThat(error_msg).isNotBlank().isNotNull().isNotEmpty();
+@@ -44,6 +48,7 @@
+ 
+         DashbordPage dashBoardPage  = new DashbordPage(DriverManager.getDriver());
+         String usernameLoggedIn = dashBoardPage.loggedInUserName();
++        logger.info("Starting the Testcases Page Object Model");
+ 
+ 
+         assertThat(usernameLoggedIn).isNotBlank().isNotNull().isNotEmpty();
+@@ -54,3 +59,18 @@
+     }
+ 
+ }
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+--- /dev/null	(date 1748445104660)
++++ b/.idea/workspace.xml	(date 1748445104660)
+@@ -0,0 +1,232 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="2c92e6ab-09be-4e95-b4a3-c1d1c794a26c" name="Changes" comment="commit">
++      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/tests/TestVWOLogin_02_PropertyReader_DriverManager_POM.java" afterDir="false" />
++    </list>
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Class" />
++      </list>
++    </option>
++  </component>
++  <component name="Git.Settings">
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;Yashaswini200&quot;
++  }
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/Yashaswini200/SeleniumAdvanceFramework.git&quot;,
++    &quot;accountId&quot;: &quot;366338f6-b2e0-473b-bbfc-888822b2aa2c&quot;
++  }
++}</component>
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 8
++}</component>
++  <component name="ProjectId" id="2vcncj6uTsKd5fyFud6HTmybtGg" />
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
++    <ConfirmationsSetting value="1" id="Add" />
++  </component>
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;TestNG.C:/Users/babus/IdeaProjects/SeleniumAdvanceFramework/testng.xml.executor&quot;: &quot;Run&quot;,
++    &quot;TestNG.TestVWOLogin_02_PropertyReader_DriverManager_POM.executor&quot;: &quot;Run&quot;,
++    &quot;TestNG.TestVWOLogin_03_PropertyReader_DriverManager_POM.executor&quot;: &quot;Run&quot;,
++    &quot;TestNG.TestVWOLogin_04_PropertyReader_DriverManager_POM_CommonToAll.executor&quot;: &quot;Run&quot;,
++    &quot;TestNG.Testvwologin_01_NormalScript.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/babus/Downloads/APIAutomationFramworkATB10x-main&quot;
++  }
++}</component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\babus\IdeaProjects\SeleniumAdvanceFramework\src\main\java\org\example\pages\pageFactory" />
++    </key>
++  </component>
++  <component name="RunManager">
++    <configuration name="C:/Users/babus/IdeaProjects/SeleniumAdvanceFramework/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
++      <module name="SeleniumAdvanceFramework" />
++      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
++      <option name="TEST_OBJECT" value="SUITE" />
++      <properties />
++      <listeners />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="TestNG.C:/Users/babus/IdeaProjects/SeleniumAdvanceFramework/testng.xml" />
++      </list>
++    </recent_temporary>
++  </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="2c92e6ab-09be-4e95-b4a3-c1d1c794a26c" name="Changes" comment="" />
++      <created>1744453312718</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1744453312718</updated>
++    </task>
++    <task id="LOCAL-00001" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748190332031</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1748190332031</updated>
++    </task>
++    <task id="LOCAL-00002" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748190362745</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1748190362745</updated>
++    </task>
++    <task id="LOCAL-00003" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748190386385</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1748190386385</updated>
++    </task>
++    <task id="LOCAL-00004" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748277111330</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1748277111330</updated>
++    </task>
++    <task id="LOCAL-00005" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748277140999</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1748277140999</updated>
++    </task>
++    <task id="LOCAL-00006" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748277184812</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1748277184812</updated>
++    </task>
++    <task id="LOCAL-00007" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748277209513</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1748277209513</updated>
++    </task>
++    <task id="LOCAL-00008" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748355606143</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1748355606143</updated>
++    </task>
++    <task id="LOCAL-00009" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748355712817</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1748355712817</updated>
++    </task>
++    <task id="LOCAL-00010" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748355761764</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1748355761764</updated>
++    </task>
++    <task id="LOCAL-00011" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748355872290</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1748355872290</updated>
++    </task>
++    <task id="LOCAL-00012" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748355902809</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1748355902809</updated>
++    </task>
++    <task id="LOCAL-00013" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748355927600</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1748355927600</updated>
++    </task>
++    <task id="LOCAL-00014" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748442645547</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1748442645547</updated>
++    </task>
++    <task id="LOCAL-00015" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748442701339</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1748442701339</updated>
++    </task>
++    <task id="LOCAL-00016" summary="commit">
++      <option name="closed" value="true" />
++      <created>1748442764758</created>
++      <option name="number" value="00016" />
++      <option name="presentableId" value="LOCAL-00016" />
++      <option name="project" value="LOCAL" />
++      <updated>1748442764758</updated>
++    </task>
++    <option name="localTasksCounter" value="17" />
++    <servers />
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="commit" />
++    <option name="LAST_COMMIT_MESSAGE" value="commit" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1744453482486)
++++ b/.idea/encodings.xml	(date 1744453482486)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+new file mode 100644
+--- /dev/null	(date 1744460961221)
++++ b/pom.xml	(date 1744460961221)
+@@ -0,0 +1,109 @@
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++
++  <groupId>org.example</groupId>
++  <artifactId>SeleniumAdvanceFramework</artifactId>
++  <version>1.0-SNAPSHOT</version>
++  <packaging>jar</packaging>
++
++  <name>SeleniumAdvanceFramework</name>
++  <url>http://maven.apache.org</url>
++
++  <properties>
++    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++  </properties>
++
++  <dependencies>
++
++    <!-- Selenium-java -->
++    <dependency>
++      <groupId>org.seleniumhq.selenium</groupId>
++      <artifactId>selenium-java</artifactId>
++      <version>4.31.0</version>
++    </dependency>
++
++    <!-- Testng -->
++    <dependency>
++      <groupId>org.testng</groupId>
++      <artifactId>testng</artifactId>
++      <version>7.11.0</version>
++      <scope>test</scope>
++    </dependency>
++
++    <!-- Allure Report TestNG-java -->
++
++    <dependency>
++      <groupId>io.qameta.allure</groupId>
++      <artifactId>allure-testng</artifactId>
++      <version>2.26.0</version>
++    </dependency>
++
++
++    <!-- ReportNG - Reports -java -->
++
++    <dependency>
++      <groupId>org.uncommons</groupId>
++      <artifactId>reportng</artifactId>
++      <version>1.1.2</version>
++      <scope>test</scope>
++    </dependency>
++
++
++    <!-- AssertJ  - assertions -->
++
++    <dependency>
++      <groupId>org.assertj</groupId>
++      <artifactId>assertj-core</artifactId>
++      <version>3.25.1</version>
++      <scope>test</scope>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.logging.log4j</groupId>
++      <artifactId>log4j-core</artifactId>
++      <version>3.0.0-beta2</version>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.logging.log4j</groupId>
++      <artifactId>log4j-api</artifactId>
++      <version>3.0.0-beta2</version>
++    </dependency>
++
++
++    <dependency>
++      <groupId>org.apache.poi</groupId>
++      <artifactId>poi</artifactId>
++      <version>5.2.4</version>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.poi</groupId>
++      <artifactId>poi-ooxml</artifactId>
++      <version>5.2.4</version>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.poi</groupId>
++      <artifactId>poi-ooxml-schemas</artifactId>
++      <version>4.1.2</version>
++    </dependency>
++
++
++    <dependency>
++      <groupId>org.apache.logging.log4j</groupId>
++      <artifactId>log4j-core</artifactId>
++      <version>3.0.0-beta2</version>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.logging.log4j</groupId>
++      <artifactId>log4j-api</artifactId>
++      <version>3.0.0-beta2</version>
++    </dependency>
++
++
++
++  </dependencies>
++</project>
