@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite"><test verbose="2" preserve-order="true" name="C:/Users/babus/IdeaProjects/SeleniumAdvanceFramework/src/test/java/org/example/tests/TestVWOLogin_retry.java"><classes><class name="org.example.tests.TestVWOLogin_retry"><methods><include name="testnegative"/><include name="testpositive"/></methods></class></classes></test></suite>
