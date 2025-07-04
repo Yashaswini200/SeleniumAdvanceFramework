@@ -8,7 +8,7 @@ public class Base_test { @BeforeMethod
 public void setUp(){
     DriverManager.init();
 }
-
+//
     @AfterMethod
     public void tearDown(){
         DriverManager.down();
